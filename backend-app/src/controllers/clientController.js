@@ -26,17 +26,15 @@ const getAllClients = async (req, res) => {
     }
 };
 
-// Controller method: Get Client by ID
 const getClientById = async (req, res) => {
     try {
-        console.log("req.params.id", req.params.id);
-        const Client = await Client.findById(req.params.id);
+        const client = await Client.findById(req.params.id);
 
-        if (!Client) {
+        if (!client) {
             return res.status(404).json({ error: 'Client not found' });
         }
 
-        return res.status(200).json(Client);
+        return res.status(200).json(client);
     } catch (error) {
         console.error(`Error getting Client with ID ${req.params.id}: ${error.message}`);
         return res.status(500).json({ error: 'Internal Server Error' });
@@ -58,6 +56,7 @@ const updateClient = async (req, res) => {
         return res.status(500).json({ error: 'Internal Server Error' });
     }
 };
+
 
 // Controller method: Delete Client by ID
 const deleteClient = async (req, res) => {
