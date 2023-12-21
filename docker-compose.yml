@@ -1,0 +1,45 @@
+version: '3.7'
+
+services:
+  server:
+    build:
+      context: ./backend-app
+      dockerfile: Dockerfile
+    container_name: syndicate-backend
+    command: npm start
+    volumes:
+      - ./backend-app/:/src/server
+    ports:
+      - "3000:3000"
+    env_file: ./backend-app/.env
+    environment:
+      - NODE_ENV=development
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://localhost:3000" ]
+      interval: 1m30s
+      timeout: 10s
+      retries: 3
+    networks:
+      - app-network
+
+  client:
+    build:
+      context: ./frontend-app
+      dockerfile: Dockerfile
+    container_name: syndicate-frontend
+    command: npm run dev
+    volumes:
+      - ./frontend-app/:/src/App
+    depends_on:
+      - server
+    ports:
+      - "4000:4000"
+    networks:
+      - app-network
+
+volumes:
+  data-volume:
+
+
+networks:
+  app-network:

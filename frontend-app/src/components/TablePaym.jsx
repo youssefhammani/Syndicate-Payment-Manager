@@ -293,7 +293,7 @@ const TablePaym = ({ payments, addPayment, deletePayment, updatePayment }) => {
                                         <FaEdit style={{ color: 'blue' }} size={13} />
                                     </button>
                                     <button className="btn btn-ghost btn-xs" onClick={() => handleDelete(payment._id)}>
-                                        <FaTrash style={{ color: 'red' }} size={13} />
+                                        <FaTrash style={{ color: 'red' }}  size={13} />
                                     </button>
                                 </th>
                             </tr>

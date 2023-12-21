@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react'
 import { FaPlus, FaTrash, FaEdit } from 'react-icons/fa';
 import axios from 'axios';
 import Swal from 'sweetalert2';
-import { set } from 'mongoose';
 // import PropTypes from 'prop-types';
 
 // Table.propTypes = {

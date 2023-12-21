@@ -357,7 +357,7 @@ const TableApar = ({ apartments, addApartment, deleteApartment, updateApartment 
                             {/* <th>ADDRESS</th> */}
                             <th>ROOMS</th>
                             <th>FLOOR</th>
-                            <th>RESERVED</th>
+                            <th>STATUS</th>
                             <th>ACTIONS</th>
                         </tr>
                     </thead>
