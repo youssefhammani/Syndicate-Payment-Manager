@@ -27,7 +27,7 @@ const createPayment = async (req, res) => {
 
         return res.status(201).json(newPayment);
     } catch (error) {
-        console.error(`Error creating payment: ${error.message}`);
+        // console.error(`Error creating payment: ${error.message}`);
         return res.status(500).json({ error: 'Internal Server Error' });
     }
 };
