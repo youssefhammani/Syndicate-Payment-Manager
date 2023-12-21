@@ -7,8 +7,8 @@ import Swal from 'sweetalert2'
 const TablePaym = ({ payments, addPayment, deletePayment, updatePayment }) => {
     const [editingPayment, setEditingPayment] = useState(null);
     const [isModalOpen, setIsModalOpen] = useState(false);
-    const [apartments, setApartments] = useState([]); // New state variable for apartments
-    const [clients, setClients] = useState([]); // New state variable for apartments
+    const [apartments, setApartments] = useState([]);
+    const [clients, setClients] = useState([]);
     const [payment, setPayment] = useState({
         apartment: '',
         amount: '',

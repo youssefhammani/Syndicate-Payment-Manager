@@ -7,6 +7,7 @@ import { set } from 'mongoose';
 const TableApar = ({ apartments, addApartment, deleteApartment, updateApartment }) => {
     const [editingApartment, setEditingApartment] = useState(null);
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const [clients, setClients] = useState([]);
     const [apartment, setApartment] = useState({
         name: '',
         description: '',
@@ -70,6 +71,8 @@ const TableApar = ({ apartments, addApartment, deleteApartment, updateApartment 
     }
 
     useEffect(() => {
+        const response = axios.get('http://localhost:3000/api/clients/update-clinets/');
+        setClients(response.data);
         if (isModalOpen) {
             document.getElementById('my_modal_2').showModal();
         }

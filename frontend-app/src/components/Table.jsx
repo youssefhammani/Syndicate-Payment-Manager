@@ -14,11 +14,25 @@ import { set } from 'mongoose';
 const Table = ({ clients, addClient, deleteClient, updateClient }) => {
     const [editingClient, setEditingClient] = useState(null);
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const [apartments, setApartments] = useState([]);
     const [client, setClient] = useState({
         name: '',
         email: '',
         phoneNumber: '',
     });
+
+    useEffect(() => {
+        const fetchApartments = async () => {
+            try {
+                const response = await axios.get('http://localhost:3000/api/apartments/get-all-apartments');
+                setApartments(response.data);
+            } catch (error) {
+                console.error('There was an error!', error);
+            }
+        };
+
+        fetchApartments();
+    }, []);
 
     const handleChange = (e) => {
         setClient({ ...client, [e.target.name]: e.target.value });
@@ -144,6 +158,22 @@ const Table = ({ clients, addClient, deleteClient, updateClient }) => {
                                     />
                                 </div>
                                 <div className="mb-4">
+                                    <label htmlFor="apartment" className='form-label block text-neutral font-bold text-start'>Apartment</label>
+                                    <select
+                                        id="apartment"
+                                        name="apartment"
+                                        className='form-group w-full p-2 border rounded-md'
+                                        value={apartments._id}
+                                        onChange={handleChange}
+                                    >
+                                        <option value="" >Select an apartment</option>
+                                        {apartments.map((apartment) => (
+                                            <option key={apartment._id} value={apartment._id}>
+                                                {apartment.name}
+                                            </option>
+                                        ))}
+                                    </select>
+                                </div>                               <div className="mb-4">
                                     <label htmlFor="image" className="form-label block font-bold text-start">
                                         Image:
                                     </label>
@@ -241,6 +271,7 @@ const Table = ({ clients, addClient, deleteClient, updateClient }) => {
                                 </label>
                             </th>
                             <th>CLIENT</th>
+                            <th>APARTMENT NAME</th>
                             <th>PHONE NUMBER</th>
                             <th>ACTIONS</th>
                         </tr>
@@ -266,6 +297,7 @@ const Table = ({ clients, addClient, deleteClient, updateClient }) => {
                                         </div>
                                     </div>
                                 </td>
+                                <td>{apartments.find(apartment => apartment._id === client.apartment)?.name || 'N/A'}</td>
                                 <td>{client.phoneNumber}</td>
                                 <th>
                                     <button className="btn btn-ghost btn-xs" onClick={() => handleEdit(client)}>

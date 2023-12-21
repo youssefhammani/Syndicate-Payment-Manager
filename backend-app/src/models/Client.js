@@ -18,6 +18,11 @@ const clientSchema = new mongoose.Schema({
         type: String,
         default: null,
     },
+    apartment: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Apartment", // Corrected the reference model name to "Apartment"
+        default: null,
+    },
     image: {
         type: String,
         default: "https://res.cloudinary.com/dmhcnhtng/image/upload/v1643044376/avatars/default_pic_jeaybr.png",
